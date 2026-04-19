@@ -5,6 +5,7 @@
 
 
 struct Enviroment {
+public:
 	int temp;
 	int flora;
 	int fauna;
@@ -13,6 +14,7 @@ struct Enviroment {
 };
 
 struct Ald {
+public:
 	char blood;
 	char eat;
 	char size;
@@ -23,9 +25,9 @@ int main() {
 
 	printf("Choose your enviroment:\n");
 	printf("1: Grassland | 2: Desert | 3: Jungle | 4: Tundra\n");
-	int selection = -1;
+	int selection = 100;
 	while (selection < 0 || selection > 5) {
-		scanf_s("%d", selection);
+		scanf_s(" %d", &selection);
 	}
 	if (selection == 1) {
 		Enviroment env = Enviroment(3, 3, 3, 2);
@@ -42,27 +44,23 @@ int main() {
 	printf("Create your Ald\n");
 	printf("Is it warm-blooded (w) or cold-blooded? (c)\n");
 	char bslect = 'f';
-	while (bslect != 'c' || bslect != 'w') {
-		scanf_s("%c", bslect);
+	while (bslect != 'c' && bslect != 'w') {
+		scanf_s(" %c",&bslect);
 		ald.blood = bslect;
 	}
 	printf("Is it a Carnivore (c), Omnivore (o) or Herbivore (h)?\n");
 	char eslect = 'f';
-	while (eslect != 'c' || eslect != 'o' || eslect != 'h') {
-		scanf_s("%c", eslect);
+	while (eslect != 'c' && eslect != 'o' && eslect != 'h') {
+		scanf_s(" %c", &eslect);
 		ald.eat = eslect;
 	}
 	printf("Is your Ald big (b), medium (m) or small (s)?\n");
 	char sslect = 'f';
-	while (sslect != 'b' || sslect != 'm' || sslect != 's') {
-		scanf_s("%c", sslect);
+	while (sslect != 'b' && sslect != 'm' && sslect != 's') {
+		scanf_s(" %c", &sslect);
 		ald.size = sslect;
 	}
 	
-
-
-
-
 
 
 }
