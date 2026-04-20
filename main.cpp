@@ -2,6 +2,8 @@
 #include <math.h> 
 #include <stdio.h>
 #include <string>
+#include <cmath>
+#include <random>
 
 
 struct Enviroment {
@@ -10,7 +12,7 @@ public:
 	int flora;
 	int fauna;
 	int pred;
-	Enviroment(int vtemp, int vflora, int vfauna, int vpred) : temp(vtemp), flora(vflora), fauna(vfauna), pred(vpred) {};
+	//Enviroment(int vtemp, int vflora, int vfauna, int vpred) : temp(vtemp), flora(vflora), fauna(vfauna), pred(vpred) {};
 };
 
 struct Ald {
@@ -21,7 +23,11 @@ public:
 };
 
 int main() {
+	
+	srand(time(0));
+
 	Ald ald;
+	Enviroment env;
 
 	printf("Choose your enviroment:\n");
 	printf("1: Grassland | 2: Desert | 3: Jungle | 4: Tundra\n");
@@ -30,16 +36,28 @@ int main() {
 		scanf_s(" %d", &selection);
 	}
 	if (selection == 1) {
-		Enviroment env = Enviroment(3, 3, 3, 2);
+		env.temp = 3;
+		env.flora = 4;
+		env.fauna = 3;
+		env.pred = 3;
 	}
 	else if (selection == 2) {
-		Enviroment env = Enviroment(5, 2, 1, 3);
+		env.temp = 5;
+		env.flora = 2;
+		env.fauna = 1;
+		env.pred = 2;
 	}
 	else if (selection == 3) {
-		Enviroment env = Enviroment(4, 5, 5, 4);
+		env.temp = 4;
+		env.flora = 4;
+		env.fauna = 5;
+		env.pred = 5;
 	}
 	else if (selection == 4) {
-		Enviroment env = Enviroment(1, 1, 3, 2);
+		env.temp = 1;
+		env.flora = 1;
+		env.fauna = 3;
+		env.pred = 2;
 	}
 	printf("Create your Ald\n");
 	printf("Is it warm-blooded (w) or cold-blooded? (c)\n");
@@ -61,6 +79,80 @@ int main() {
 		ald.size = sslect;
 	}
 	
+	double surv = 3;
+	int size = 0;
 
+	if (ald.size == 'b') {
+		size = 4;
+	}
+	else if (ald.size == 'm') {
+		size = 3;
+	}
+	else {
+		size = 2;
+	}
+
+	if (ald.eat == 'c') {
+		surv += env.fauna * 1.2 - size;
+	}
+	else if (ald.eat == 'o') {
+		surv += (env.flora + env.fauna) * 0.6 - size;
+	}
+	else {
+		surv += env.flora * 1.2 - size;
+	}
+
+	surv += (size * 0.8) - env.pred;
+
+	if (ald.blood == 'c') {
+		surv -= abs(4 - env.temp);
+	}
+	else {
+		surv -= abs(3 - env.temp);
+	}
+
+	if (surv < 0) {
+		surv = 0;
+	}
+	else {
+		surv *= 10;
+	}
+
+	int aldnum = 1;
+
+	printf("Is your Ald Feral (f) or Intelligent (i)\n");
+		char mslect = 'o';
+		scanf_s(" %c", &mslect);
+		if (mslect == 'f') {
+			aldnum += 1;
+		}
+		else if (mslect == 'i') {
+			surv += 15;
+		}
+
+	while (aldnum > 0) {
+		
+		int generation = aldnum;
+
+		while (generation > 0) {
+			if (rand() % 100 >= surv){
+				aldnum -= 1;
+			}
+			generation -= 1;
+		}
+		if (aldnum <= 0) {
+			printf("Every Ald is dead\n");
+			return 0;
+		}
+		else {
+			printf("Ald are laying eggs\n");
+			aldnum *= 2;
+			printf("There are currently %d Alds\n", aldnum);
+		}
+		if (aldnum > 500000000) {
+			printf("This world has been consumed by Alderkind...");
+		}
+	}
+	return 0;
 
 }
