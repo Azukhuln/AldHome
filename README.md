@@ -5,7 +5,7 @@ Activity description: what were the expectations and what did you do?
 For the 2026 Vandal game jam, we were asked to create a game with the theme of "egg" and the limitation of "you control the enviroment".
 
 Technical decisions: what decisions did you take from a technical perspective throughout this activity/event?
-I decided to do a simple terminal text-based game due to couple factors, mainly the lack of time, and the fact that I was working alone. I used c++ because it was the language I am the most comfortable with.
+I decided to do a simple terminal text-based game due to couple factors, mainly the lack of time, and the fact that I was working alone. I used c++ because it was the language I am the most comfortable with. AI was used very sparingly, mainly used for theoretical balance checking, such as helping me determine which options were statistically much more optimal so that I could alter calculations. 
 
 Contributions: did you participate alone or with a team? If with a team, what were your specific individual contributions?
 I worked alone.
